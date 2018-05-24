@@ -16,7 +16,6 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { SuperloopApiService } from './superloop-api.service';
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './not-found.component';
-import { TodoFormComponent } from './todo-form/todo-form.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -28,7 +27,6 @@ import { MatSelectModule } from '@angular/material/select';
     AppComponent,
     TodoListComponent,
     PageNotFoundComponent,
-    TodoFormComponent,
     AddDialogComponent
   ],
   imports: [

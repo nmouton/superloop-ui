@@ -25,6 +25,14 @@ export class SuperloopApiService {
       });
   }
 
+  filterToDosByStatus(status: string) {
+    return this.http
+      .get<ToDoItem[]>(this.bootAppUrl+'/api/todos/'+status)
+      .subscribe(resp => {
+        this.toDoListSource.next(resp);
+      });
+  }
+
   setToDo(toDo: ToDoItem) {
     return this.http
       .post(this.bootAppUrl+'/api/todo',toDo)

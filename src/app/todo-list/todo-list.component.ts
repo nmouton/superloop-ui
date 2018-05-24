@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material';
 import { ViewChild } from '@angular/core';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 import * as _ from "lodash";
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-todo-list',
@@ -19,6 +20,7 @@ export class TodoListComponent implements OnInit {
   toDoItems: ToDoItem[];
   displayedColumns = ['name', 'description', 'dueDate', 'status', 'addRemove', 'delete'];
   dataSource: MatTableDataSource<any>;
+  status: string;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -34,22 +36,18 @@ export class TodoListComponent implements OnInit {
   }
 
   loadPage(response){
-    //unpack the HashMap array with a few lodash streams
-    const stripObjectNames = _.values(response);
-    //map the results
-    const result = _.transform(stripObjectNames, function(result, values, keys) {
-      _.map(values, function (value, key) {
+    //unpack the flat map
+    const result = _.transform(response, function(result, value, key) {
         _.set(result, key + '.id', key);
         _.set(result, key + '.name', value.name);
         _.set(result, key + '.description', value.description);
         _.set(result, key + '.dueDate', value.dueDate);
         _.set(result, key + '.status', value.status);
-      })
-    });
-    //flatten the result into a list of ToDoItem objects
-    const flatten = _.values(result);
+      });
+    //flatten the object into an array
+    const flatArray = _.values(result);
     //load up the angular material table directives
-    this.dataSource = new MatTableDataSource(flatten);
+    this.dataSource = new MatTableDataSource(flatArray);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -72,6 +70,14 @@ export class TodoListComponent implements OnInit {
       width: '600px',
       data: {id, name, description, status, dueDate}
     });
+  }
+
+  filter(){
+    if(this.status == "None") {
+      this.superloopApiService.getToDos();
+    } else {
+      this.superloopApiService.filterToDosByStatus(this.status);
+    }
   }
 
   ngOnInit() {

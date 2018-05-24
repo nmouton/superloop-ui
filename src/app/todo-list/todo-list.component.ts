@@ -37,14 +37,14 @@ export class TodoListComponent implements OnInit {
 
   loadPage(response){
     //unpack the flat map
-    const result = _.transform(response, function(result, value, key) {
+    const result = _.transform(response, function(result, value: ToDoItem, key) {
         _.set(result, key + '.id', key);
         _.set(result, key + '.name', value.name);
         _.set(result, key + '.description', value.description);
         _.set(result, key + '.dueDate', value.dueDate);
         _.set(result, key + '.status', value.status);
       });
-    //flatten the object into an array
+    //flatten the result into an array
     const flatArray = _.values(result);
     //load up the angular material table directives
     this.dataSource = new MatTableDataSource(flatArray);

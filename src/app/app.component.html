@@ -1,7 +1,16 @@
 <header>
-  <mat-toolbar color="primary">Superloop - Nick Mouton</mat-toolbar>
+  <mat-toolbar color="primary">
+    <button mat-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/view" routerLinkActive="active">View To Dos</button>
+      <button mat-menu-item routerLink="/add" routerLinkActive="active">Add To Dos</button>
+    </mat-menu>
+    Superloop - ToDo - Nick Mouton
+  </mat-toolbar>
 </header>
-<section class="container">
-  <material-table></material-table>
+<section class="custom-container set-center">
+  <router-outlet></router-outlet>
 </section>
 <footer></footer>

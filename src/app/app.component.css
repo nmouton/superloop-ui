@@ -1,0 +1,12 @@
+.custom-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 100rem;
+  max-height: 100rem;
+  overflow: auto;
+}
+
+.set-center {
+    margin: auto;
+    width: 50%;
+  }

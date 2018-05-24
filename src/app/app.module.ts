@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { MaterialTableComponent } from './material-table/material-table.component';
 import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatMenuModule } from '@angular/material/menu';
@@ -13,11 +12,24 @@ import { HttpClientModule }    from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import { AppComponent } from './app.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TodoListComponent } from './todo-list/todo-list.component';
+import { SuperloopApiService } from './superloop-api.service';
+import { AppRoutingModule } from './app-routing.module';
+import { PageNotFoundComponent } from './not-found.component';
+import { TodoFormComponent } from './todo-form/todo-form.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AddDialogComponent } from './add-dialog/add-dialog.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MaterialTableComponent
+    TodoListComponent,
+    PageNotFoundComponent,
+    TodoFormComponent,
+    AddDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -33,9 +45,17 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatDialogModule,
+    MatSelectModule,
+    AppRoutingModule
   ],
-  providers: [],
+  entryComponents: [
+    AddDialogComponent
+  ],
+  providers: [SuperloopApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
